@@ -1,0 +1,16 @@
+version: "3.8"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200" # Map host port 4200 to container port 4200
+    volumes:
+      - .:/usr/src/app # Sync local files with the container
+      - /usr/src/app/node_modules # Avoid syncing node_modules
+
+
+networks:
+  web:
+    external: true
