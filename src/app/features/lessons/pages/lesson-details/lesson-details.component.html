@@ -1,0 +1,33 @@
+<div class="lesson-questions">
+  <h2>Questions</h2>
+  <section>
+    <app-lesson-content [content]="lesson()?.content || []"></app-lesson-content>
+  </section>
+  <ul>
+    @for (question of lesson()?.questions; track question.id) {
+      <li>
+        <div class="question-header">
+          <span>{{ $index + 1 }}. {{ question.questionText }}</span>
+          <button (click)="toggleAnswers(question.id)">
+            {{ expandedQuestionId === question.id ? 'Hide' : 'Show' }} Answers
+          </button>
+        </div>
+
+        @if (expandedQuestionId === question.id) {
+          <ul class="answers">
+            @for (option of question.options; track $index) {
+              <li (click)="selectAnswer(option.id, question.correctAnswer)">
+                <span>{{ option.optionText }}</span>
+              </li>
+            }
+          </ul>
+          @if (selectedAnswer) {
+            <p [class]="{ correct: isCorrect, incorrect: !isCorrect }">
+              {{ isCorrect ? 'Correct Answer!' : 'Wrong Answer, Try Again!' }}
+            </p>
+          }
+        }
+      </li>
+    }
+  </ul>
+</div>

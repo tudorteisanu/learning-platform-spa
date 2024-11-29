@@ -1,0 +1,23 @@
+<div class="profile-details">
+  <img
+    *ngIf="profile?.avatarUrl; else placeholder"
+    [src]="profile?.avatarUrl"
+    alt="User Avatar"
+  />
+  <ng-template #placeholder>
+    <div class="avatar-placeholder">Avatar</div>
+  </ng-template>
+
+  <h2>{{ profile?.name }}</h2>
+  <p>{{ profile?.email }}</p>
+
+  <button (click)="editMode = !editMode">
+    {{ editMode ? 'Cancel' : 'Edit Profile' }}
+  </button>
+
+  <form *ngIf="editMode" (ngSubmit)="saveProfile()">
+    <input type="text" [(ngModel)]="editableProfile.name" name="name" />
+    <input type="email" [(ngModel)]="editableProfile.email" name="email" />
+    <button type="submit">Save</button>
+  </form>
+</div>

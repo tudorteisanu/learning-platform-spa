@@ -1,0 +1,29 @@
+@use 'src/styles/mixins.scss' as *;
+
+.lessons-list {
+  margin-top: 16px;
+  padding: 1rem;
+
+  h2 {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  .lesson-item {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin-bottom: 8px;
+
+    @include flex-between;
+
+    strong {
+      font-size: 16px;
+    }
+
+    p {
+      font-size: 14px;
+      color: #666;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+<section>
+  @for(item of sortedContent(); track item.id) {
+    @switch (item.type) {
+      @case ('image') {
+        <img [src]="item.data" alt="">
+      }
+      @case ('video') {
+        <video  controls autoplay playsInline>
+          <source [src]="item.data" type="video/mp4">
+        </video>
+      }
+      @default {
+        <p>{{ item.data }}</p>
+      }
+    }
+  }
+</section>

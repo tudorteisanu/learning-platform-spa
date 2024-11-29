@@ -1,0 +1,12 @@
+<div class="profile-page">
+  <!-- Profile Details -->
+  <app-profile-details
+    [profile]="profile$ | async"
+    (update)="onProfileUpdate($event)"
+  ></app-profile-details>
+
+  <!-- Achievements -->
+  <app-profile-achievements
+    [achievements]="(profile$ | async)?.achievements || []"
+  ></app-profile-achievements>
+</div>

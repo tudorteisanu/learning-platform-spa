@@ -1,0 +1,73 @@
+/* reset.scss */
+
+/* Box-sizing border-box for all elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove default margins for common elements */
+body, h1, h2, h3, h4, h5, h6, p, blockquote, figure, dl, dd {
+  margin: 0;
+}
+
+/* Remove default list styles */
+ul[role='list'], ol[role='list'], ul, ol {
+  list-style: none;
+  padding: 0;
+}
+
+/* Set default line-height and prevent content shifting due to margin collapse */
+html:focus-within {
+  scroll-behavior: smooth;
+}
+body {
+  min-height: 100vh;
+  line-height: 1.5;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+/* Remove default padding for elements like main and section */
+main, section, footer, header, nav, aside {
+  display: block;
+}
+
+/* A consistent anchor styling */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Images and media should be displayed responsively */
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+/* Forms elements reset */
+input, button, textarea, select {
+  font: inherit;
+}
+
+/* Prevent text overflows */
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+
+/* Full-height containers */
+html, body {
+  height: 100%;
+}
+
+/* Reset default button styles */
+button {
+  all: unset;
+  cursor: pointer;
+}
+
+/* Default focus styling for accessibility */
+:focus {
+  outline: 2px solid #007BFF;
+  outline-offset: 2px;
+}

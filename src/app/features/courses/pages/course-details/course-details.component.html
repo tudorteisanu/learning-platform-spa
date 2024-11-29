@@ -1,0 +1,11 @@
+<section *ngIf="course() as course" class="course-details">
+  <app-course-card [course]="course"></app-course-card>
+</section>
+
+<section *ngIf="!course()" class="loading">
+  <p>Loading course details...</p>
+</section>
+
+<section>
+  <app-lessons-list [lessons]="lessons()"></app-lessons-list>
+</section>
