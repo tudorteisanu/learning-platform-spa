@@ -1,0 +1,43 @@
+@use 'src/styles/mixins.scss' as *;
+
+.answers {
+  list-style: none;
+  padding: 0 1rem;
+
+  li {
+    padding: 0.2rem;
+    color: #555;
+    margin-top: 0.5rem;
+
+    button {
+      @include flex-between;
+      width: 100%;
+    }
+
+    span:last-child {
+      font-weight: bold;
+      margin-left: 0.5rem;
+    }
+  }
+}
+
+
+.correct {
+  color: green;
+  border: 1px solid green;
+  background: rgba(green, 0.2);
+  border-radius: 3px;
+}
+
+.incorrect {
+  color: red;
+  background: rgba(red, 0.2);
+  border: 1px solid red;
+}
+
+.selected {
+  color: red;
+  background: rgba(gray, 0.2);
+  border: 1px solid gray;
+}
+

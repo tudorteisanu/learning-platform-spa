@@ -1,11 +1,14 @@
 <section class="lessons-list">
   <h2>Lessons</h2>
   <ul>
-    <li *ngFor="let lesson of lessons()" class="lesson-item">
-      <span>{{ lesson.title }}</span>
-      <button [routerLink]="['/lessons', lesson.id]" class="view-details">
-        View Details
-      </button>
-    </li>
+    @for (lesson of lessons(); track lesson.id) {
+      <li class="lesson-item">
+        <span>{{ lesson.title }}</span>
+        <button [routerLink]="['/lessons', lesson.id]" class="view-details">
+          View Details
+        </button>
+      </li>
+    }
+
   </ul>
 </section>

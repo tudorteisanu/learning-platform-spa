@@ -1,18 +1,17 @@
-// src/app/features/courses/pages/course-details/course-details.component.ts
 import { Component, inject } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CourseService } from '../../services/course.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { NgIf } from '@angular/common';
 import { CourseCardComponent } from "../../components/course-card/course-card.component";
 import { LessonsListComponent } from "../../../lessons/components/lessons-list/lessons-list.component";
+import { Course } from 'src/app/shared/models/course.model';
 
 @Component({
-  selector: 'app-course-details',
-  templateUrl: './course-details.component.html',
-  styleUrls: ['./course-details.component.scss'],
-  standalone: true,
-  imports: [NgIf, CourseCardComponent, LessonsListComponent],
+    selector: 'app-course-details',
+    templateUrl: './course-details.component.html',
+    styleUrls: ['./course-details.component.scss'],
+    standalone: true,
+    imports: [CourseCardComponent, LessonsListComponent]
 })
 export class CourseDetailsComponent {
   private route = inject(ActivatedRoute);
@@ -20,7 +19,7 @@ export class CourseDetailsComponent {
 
   courseId = this.route.snapshot.paramMap.get('id')!;
   course = toSignal(this.courseService.getCourseById(this.courseId), {
-    initialValue: null,
+    initialValue: {} as Course,
   });
   lessons = toSignal(
     this.courseService.getLessonsByCourseId(this.courseId),

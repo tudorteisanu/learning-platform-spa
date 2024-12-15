@@ -1,12 +1,12 @@
 <div class="profile-details">
-  <img
-    *ngIf="profile?.avatarUrl; else placeholder"
+  @if (profile?.avatarUrl) {
+    <img
     [src]="profile?.avatarUrl"
     alt="User Avatar"
   />
-  <ng-template #placeholder>
+  } @else {
     <div class="avatar-placeholder">Avatar</div>
-  </ng-template>
+  }
 
   <h2>{{ profile?.name }}</h2>
   <p>{{ profile?.email }}</p>
@@ -15,9 +15,11 @@
     {{ editMode ? 'Cancel' : 'Edit Profile' }}
   </button>
 
-  <form *ngIf="editMode" (ngSubmit)="saveProfile()">
-    <input type="text" [(ngModel)]="editableProfile.name" name="name" />
-    <input type="email" [(ngModel)]="editableProfile.email" name="email" />
-    <button type="submit">Save</button>
-  </form>
+  @if (editMode) {
+    <form (ngSubmit)="saveProfile()">
+      <input type="text" [(ngModel)]="editableProfile.name" name="name" />
+      <input type="email" [(ngModel)]="editableProfile.email" name="email" />
+      <button type="submit">Save</button>
+    </form>
+  }
 </div>

@@ -7,11 +7,11 @@ import { AsyncPipe } from '@angular/common';
 import { ProfileAchievementsComponent } from "../../components/profile-achievements/profile-achievements.component";
 
 @Component({
-  selector: 'app-profile-page',
-  standalone: true,
-  templateUrl: './profile-page.component.html',
-  styleUrls: ['./profile-page.component.scss'],
-  imports: [ProfileDetailsComponent, AsyncPipe, ProfileAchievementsComponent],
+    selector: 'app-profile-page',
+    standalone: true,
+    templateUrl: './profile-page.component.html',
+    styleUrls: ['./profile-page.component.scss'],
+    imports: [ProfileDetailsComponent, AsyncPipe, ProfileAchievementsComponent]
 })
 export class ProfilePageComponent implements OnInit {
   private readonly profileService = inject(ProfileService);

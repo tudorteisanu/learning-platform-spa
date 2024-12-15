@@ -5,4 +5,5 @@ export interface Question {
   questionText: string;
   options: Option[];
   correctAnswer: string | null;
+  userAnswer: string | null;
 }
