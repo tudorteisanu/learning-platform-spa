@@ -1,10 +1,11 @@
 <section class="courses-overview">
   <h1>Available Courses</h1>
   <div class="course-list">
-    <app-course-card
-      [routerLink]="[course.id]"
-      *ngFor="let course of courses()"
-      [course]="course"
-    ></app-course-card>
+    @for (course of courses(); track course.id) {
+      <app-course-card
+        [routerLink]="[course.id]"
+        [course]="course"
+      ></app-course-card>
+    }
   </div>
 </section>

@@ -1,14 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { UserProfile } from '../../models/profile.model';
 import { FormsModule } from '@angular/forms';
-import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-profile-details',
-  standalone: true,
-  templateUrl: './profile-details.component.html',
-  styleUrls: ['./profile-details.component.scss'],
-  imports: [FormsModule, NgIf]
+    selector: 'app-profile-details',
+    standalone: true,
+    templateUrl: './profile-details.component.html',
+    styleUrls: ['./profile-details.component.scss'],
+    imports: [FormsModule]
 })
 export class ProfileDetailsComponent {
   @Input() profile: UserProfile | null = null;

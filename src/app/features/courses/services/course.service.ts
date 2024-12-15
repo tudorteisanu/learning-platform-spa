@@ -1,4 +1,3 @@
-// src/app/features/courses/services/course.service.ts
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
@@ -11,7 +10,7 @@ import { Lesson } from 'src/app/shared/models/lesson.model';
 })
 export class CourseService {
   private http = inject(HttpClient);
-  private apiUrl = '/courses'; // Replace with your API endpoint
+  private apiUrl = '/courses';
 
   getCourses(): Observable<Course[]> {
     return this.http.get<PaginatedResponse<Course>>(this.apiUrl)

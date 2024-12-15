@@ -1,0 +1,14 @@
+@use 'src/styles/mixins.scss' as *;
+
+nav {
+  width: 100%;
+  padding: 1rem;
+
+  @include flex-center;
+  @include box-shadow;
+
+  ul {
+    @include flex-between;
+    gap: 15px;
+  }
+}
