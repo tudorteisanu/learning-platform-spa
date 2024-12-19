@@ -1,0 +1,9 @@
+@use 'src/styles/mixins.scss' as *;
+
+div {
+  padding: 1rem;
+
+  button {
+    @include flex-start;
+  }
+}

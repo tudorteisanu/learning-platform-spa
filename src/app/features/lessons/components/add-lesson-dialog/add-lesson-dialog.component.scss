@@ -1,0 +1,14 @@
+@use 'src/styles/variables.scss' as *;
+
+.actions {
+  margin-top: .5rem;
+  display: flex;
+  gap: .5rem;
+
+  .cancel {
+    background-color: transparent;
+    color: $theme-primary;
+    outline-color: lightgray;
+  }
+}
+

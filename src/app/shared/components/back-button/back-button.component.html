@@ -1,0 +1,9 @@
+<div>
+  <button (click)="goBack()">
+    <app-icon name="arrow-back" />
+
+    @if (label()) {
+      <span>{{label()}}</span>
+    }
+  </button>
+</div>

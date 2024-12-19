@@ -1,0 +1,7 @@
+<button class="btn" [class.text]="text()">
+  @if (loading()) {
+    <div class="spinner"></div>
+  } @else {
+    <ng-content />
+  }
+</button>

@@ -1,0 +1,15 @@
+
+<section class="answer-form">
+  <h2 class="answer-form__title">Answer Details</h2>
+  <div class="answer-form__content">
+    <form [formGroup]="form">
+        <label for="">
+          <span>Description</span>
+          <input placeholder="Inser description here" formControlName="description" type="text">
+        </label>
+    </form>
+    <div class="answer-form__actions">
+      <app-button [loading]="loading()" (click)="submit()">Save</app-button>
+    </div>
+  </div>
+</section>

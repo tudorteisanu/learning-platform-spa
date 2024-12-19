@@ -1,0 +1,11 @@
+<button (click)="emitShow()">
+  {{label()}}
+</button>
+
+@if (isVisibile()) {
+  <section class="dialog" (click)="emitHide()">
+    <div class="dialog__content" (click)="$event.stopPropagation()">
+      <ng-content />
+    </div>
+  </section>
+}

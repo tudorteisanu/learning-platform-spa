@@ -1,0 +1,25 @@
+
+
+@use 'src/styles/mixins.scss' as *;
+@use 'src/styles/variables.scss' as *;
+
+.questions {
+  margin-top: 1rem;
+  @include card;
+
+  &__list {
+    margin-top: .5rem;
+
+    &--item {
+      @include flex-between;
+      padding: .5rem 0;
+      border-bottom: 1px solid $border-color;
+    }
+  }
+
+  &__actions {
+    &--delete {
+      color: $danger-color;
+    }
+  }
+}

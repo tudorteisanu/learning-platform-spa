@@ -1,0 +1,51 @@
+@use 'src/styles/variables.scss' as *;
+@use 'src/styles/mixins.scss' as *;
+
+.btn {
+  padding: 0 1rem;
+  border-radius: .2rem;
+  background-color: $theme-primary;
+  // outline-color: lightblue;
+  // outline-width: thin;
+  // outline-style: solid;
+  color: white;
+  min-height: 35px;
+  min-width: 3rem;
+  margin: auto;
+  text-align: center;
+
+  &:disabled {
+    background-color: #eae7e7;
+    outline-color: lightgray;
+    color: rgb(187, 187, 187);
+  }
+}
+
+.text {
+  background-color: transparent;
+  padding: .2rem;
+  min-width: auto;
+  min-height: auto;
+  color: $theme-primary;
+}
+
+.spinner {
+  margin: auto;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 0.2rem solid transparent;
+  border-color: white;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}

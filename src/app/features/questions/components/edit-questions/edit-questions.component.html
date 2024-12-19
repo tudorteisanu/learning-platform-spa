@@ -1,0 +1,8 @@
+<section>
+  <app-question-form [lessonId]="lesson()?.id"/>
+  @for (item of questions(); track item.id) {
+    <!-- <app-edit-question-item [question]="item" /> -->
+  } @empty {
+    <div>There are no questions</div>
+  }
+</section>

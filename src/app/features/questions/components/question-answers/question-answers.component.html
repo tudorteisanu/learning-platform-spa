@@ -1,0 +1,18 @@
+<ul>
+  @for (option of answers(); track $index) {
+    <li
+    [class.correct]="userAnswer() && isCorrect(option.id)"
+    [class.incorrect]="option.id == userAnswer() && correctAnswer() && userAnswer() !== correctAnswer()"
+    [class.selected]="option.id == userAnswer() && !correctAnswer()"
+    >
+      <button (click)="emitSelect(option)" [disabled]="disabled()">
+        <span>{{ option.description }}</span>
+          @if (isCorrect(option.id) && userAnswer() == correctAnswer()) {
+            <app-icon name="check-circle" style="height: 20px; width: 20px;fill: green"/>
+          } @else if(isIncorrect(option.id) && userAnswer() && correctAnswer()) {
+            <app-icon name="alert-circle" style="height: 20px; width: 20px;fill: red"/>
+          }
+      </button>
+    </li>
+  }
+</ul>

@@ -1,0 +1,34 @@
+
+<div class="multiselect">
+  <div class="selected">
+    <p>Selected Options:</p>
+    <div class="selected__items" (click)="toggle()" appClickOutside (clickOutside)="hide()">
+      @for (selected of selectedItems(); track selected[valueKey()]) {
+        <div>
+          <span>
+            {{ selected[textKey()] }}
+          </span>
+          @if (!$last) {
+            <span>,</span>
+          }
+      </div>
+      }
+    </div>
+    @if (areOptionsVisivle()) {
+      <div class="options" (click)="$event.stopPropagation()">
+        @for (option of options(); track option[valueKey()]) {
+          <label>
+            <input
+              type="checkbox"
+              [checked]="isSelected(option)"
+              (change)="toggleSelection(option)"
+            />
+            <span>
+              {{ option[textKey()] }}
+            </span>
+          </label>
+        }
+      </div>
+    }
+  </div>
+</div>

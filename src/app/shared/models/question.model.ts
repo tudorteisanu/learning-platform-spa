@@ -1,9 +1,10 @@
-import { Option } from "./option.model";
+import { Answer } from "./answer.model";
 
 export interface Question {
   id: string;
+  lessonId: string;
   questionText: string;
-  options: Option[];
-  correctAnswer: string | null;
+  answers: Answer[];
+  correctAnswer: string;
   userAnswer: string | null;
 }

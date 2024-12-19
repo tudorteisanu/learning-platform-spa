@@ -1,0 +1,21 @@
+
+@use 'src/styles/mixins.scss' as *;
+@use 'src/styles/variables.scss' as *;
+
+.question{
+  @include card;
+  margin-top: 1rem;
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.5rem 0;
+    font-weight: bold;
+    border-bottom: 1px solid $border-color;
+  }
+
+  &__options {
+    padding-top: 1rem;
+  }
+}

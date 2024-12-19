@@ -24,9 +24,7 @@ html:focus-within {
 }
 body {
   min-height: 100vh;
-  line-height: 1.5;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-}
+ }
 
 /* Remove default padding for elements like main and section */
 main, section, footer, header, nav, aside {
@@ -66,8 +64,3 @@ button {
   cursor: pointer;
 }
 
-/* Default focus styling for accessibility */
-:focus {
-  outline: 2px solid #007BFF;
-  outline-offset: 2px;
-}

@@ -1,0 +1,20 @@
+<section>
+  <div class="tabs">
+    <app-tabs [tabs]="tabs" [(activeTab)]="selectedTab" />
+  </div>
+</section>
+
+@switch (selectedTab()) {
+  @case ('lesson') {
+    <div>Lesson</div>
+  }
+  @case ('question') {
+    <app-question-form [lessonId]="lessonId()" />
+    <app-questions-list [lessonId]="lessonId()" />
+    <app-answer-form />
+    <app-answers-list />
+  }
+  @case ('content') {
+    <div>Content</div>
+  }
+}

@@ -1,3 +1,39 @@
+@use './styles/variables.scss' as *;
+
 button:disabled {
   cursor: default;
+}
+
+input:not(input[type="checkbox"]),
+ textarea,
+  select {
+  padding: .5rem 1rem;
+  margin-top: .5rem;
+  border-radius: .2rem;
+  min-height: 35px;
+  border: none;
+  outline-color: $primary-color-40;
+  outline-width: thin;
+  outline-style: solid;
+  display: flex;
+  flex: 1;
+  color: rgb(88, 88, 88);
+  background-color: transparent;
+
+  &:focus {
+    outline-width: medium;
+    outline-color: $primary-color;
+  }
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+
+  color: rgb(88, 88, 88);
+}
+
+body {
+  background-color: rgb(230, 230, 231);
 }

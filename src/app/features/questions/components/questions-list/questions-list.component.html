@@ -1,0 +1,25 @@
+
+<section class="questions">
+  <h2 class="questions__title">Questions List</h2>
+  <div class="questions__list">
+    @for (item of questions(); track item.id) {
+      <div class="questions__list--item">
+        <div>
+          {{item.questionText}}
+        </div>
+        <div class="questions__actions">
+          <app-button text (click)="edit(item)">
+            <app-icon name="edit"/>
+          </app-button>
+          <app-button text (click)="delete(item.id) ">
+            <app-icon class="questions__actions--delete" name="delete"/>
+          </app-button>
+        </div>
+      </div>
+    } @empty {
+      <div>There are no questions</div>
+    }
+  </div>
+
+
+</section>

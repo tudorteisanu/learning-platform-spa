@@ -1,0 +1,12 @@
+<section class="courses-overview">
+  <h1>Available Courses</h1>
+  <div class="course-list">
+    @for (course of courses(); track course.id) {
+      <a  [routerLink]="[course.id]">
+        <app-course-card
+        [course]="course"
+      />
+    </a>
+    }
+  </div>
+</section>

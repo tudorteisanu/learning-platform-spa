@@ -1,0 +1,24 @@
+@use 'src/styles/mixins.scss' as *;
+
+.course-details {
+  padding: 16px;
+
+  h1 {
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+
+  p {
+    margin: 4px 0;
+  }
+}
+
+.loading {
+  padding: 16px;
+  text-align: center;
+}
+
+
+.container {
+  @include max-width('md');
+}

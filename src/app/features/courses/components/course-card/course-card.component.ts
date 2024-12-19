@@ -9,5 +9,5 @@ import { Course } from 'src/app/shared/models/course.model';
   imports: [],
 })
 export class CourseCardComponent {
-  course = input.required<Course>();
+  course = input<Course | null>(null);
 }

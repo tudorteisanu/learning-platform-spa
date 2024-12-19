@@ -1,0 +1,21 @@
+
+<section class="answers">
+  <h2>Answers List</h2>
+  <div class="answers__list">
+    @for (option of answers(); track option.id) {
+      <div class="answers__item">
+        <label>
+          <span>{{option.description}} </span>
+        </label>
+        <div class="answers__actions">
+          <app-button text (click)="edit(option)">
+            <app-icon name="edit"/>
+          </app-button>
+          <app-button text (click)="delete(option.id) ">
+            <app-icon class="answers__actions--delete" name="delete"/>
+          </app-button>
+        </div>
+      </div>
+    }
+  </div>
+</section>

@@ -1,0 +1,19 @@
+<div class="question">
+  <div class="question__header">
+    <span>{{ question().questionText }}</span>
+    <button (click)="toggleAnswers()">
+      {{ isExpanded() ? 'Hide' : 'Show' }} Answers
+    </button>
+  </div>
+
+  @if (isExpanded()) {
+    <div class="question__options">
+      <app-question-answers
+        [correctAnswer]="correctAnswer()"
+        [userAnswer]="userAnswer()"
+        [answers]="question().answers"
+        (select)="answer($event)"
+      />
+    </div>
+  }
+</div>

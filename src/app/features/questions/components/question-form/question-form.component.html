@@ -1,0 +1,35 @@
+
+<section class="question-edit">
+  <h2 class="question-edit__title">Question Details</h2>
+  <form class="question-edit__form" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="question">
+      <label for="">
+        <span>
+          Title
+        </span>
+        <input formControlName="questionText" type="text">
+      </label>
+      <div>
+        <app-multiselect
+          textKey="description"
+          valueKey="id"
+          formControlName="answers"
+          fetchUrl="/answers"
+         />
+      </div>
+      <label for="">
+        <span>Correct answer</span>
+        <select formControlName="correctAnswer">
+          @for(option of form.controls.answers.getRawValue(); track option.id) {
+            <option [ngValue]="option.id">
+              {{option.description}}
+            </option>
+          }
+        </select>
+      </label>
+      <div class="question__footer">
+        <button>Submit</button>
+      </div>
+    </div>
+  </form>
+</section>

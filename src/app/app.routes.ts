@@ -3,15 +3,15 @@ import { Routes } from '@angular/router';
 export const routes: Routes = [
   {
     path: 'courses',
-    loadChildren: () => import('./features/courses/courses.routes').then(m => m.coursesRoutes),
+    loadChildren: () => import('./pages/courses/courses.routes').then(m => m.coursesRoutes),
   },
   {
     path: 'lessons',
-    loadChildren: () => import('./features/lessons/lessons.routes').then(m => m.lessonsRoutes),
+    loadChildren: () => import('./pages/lessons/lessons.routes').then(m => m.lessonsRoutes),
   },
   {
     path: 'profile',
-    loadChildren: () => import('./features/profile/profile.routes').then(m => m.profileRoutes),
+    loadChildren: () => import('./pages/profile/profile.routes').then(m => m.profileRoutes),
   },
   {
     path: 'admin',

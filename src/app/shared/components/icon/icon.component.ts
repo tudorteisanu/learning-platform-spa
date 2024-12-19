@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, ElementRef, OnInit, Renderer2, inject, input, viewChild } from '@angular/core';
-import { catchError, of } from 'rxjs';
+import { IconsService } from '../../services/icons.service';
 
 const DEFAULT_ROOT_FOLDER = 'icons';
 
@@ -9,13 +8,13 @@ const DEFAULT_ROOT_FOLDER = 'icons';
   standalone: true,
   imports: [],
   templateUrl: './icon.component.html',
-  styleUrl: './icon.component.scss'
+  styleUrls: ['./icon.component.scss']
 })
 export class IconComponent implements OnInit {
-  protected readonly http = inject(HttpClient);
-  private readonly icons = new Map<string, string>();
   private readonly renderer = inject(Renderer2);
   private readonly hostElement = inject(ElementRef);
+
+  private readonly iconsService = inject(IconsService);
 
   rootFolder = input(DEFAULT_ROOT_FOLDER);
   name = input.required<string>();
@@ -26,30 +25,14 @@ export class IconComponent implements OnInit {
     this.fetchIcon();
   }
 
-  private fetchIcon() {
-    if (this.icons.get(this.name()) || !this.name()) {
-      this.injectIcon();
-      return;
-    }
-
-    const url = `${window.location.origin}/${this.rootFolder()}/${this.name()}.svg`;
-
-    this.http.get(url, { responseType: "text" })
-      .pipe(
-        catchError((error) => {
-          console.error(`Failed to load icon: ${this.name()} from ${url}`, error);
-          return of('');
-        })
-      )
-      .subscribe((icon) => {
-        this.icons.set(this.name(), icon);
-        this.injectIcon();
+  fetchIcon() {
+    this.iconsService.fetchIcon(this.name(), this.rootFolder())
+      .subscribe({
+        next: icon => this.injectIcon(icon),
       });
   }
 
-  private injectIcon(): void {
-    const icon = this.icons.get(this.name());
-
+  private injectIcon(icon: string): void {
     if (!icon) {
       return;
     }

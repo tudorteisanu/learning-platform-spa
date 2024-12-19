@@ -1,0 +1,22 @@
+@use 'src/styles/variables.scss' as *;
+@use 'src/styles/mixins.scss' as *;
+
+.tabs {
+  display: flex;
+  gap: 1rem;
+  transition: all 1s ease-in-out;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid lightgray;
+  @include card;
+  padding: 0 1rem;
+
+  &__item {
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border: none;
+
+    &.active {
+      border-bottom: 0.2rem solid $primary-color;
+    }
+  }
+}

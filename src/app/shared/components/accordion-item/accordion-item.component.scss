@@ -1,0 +1,15 @@
+@use 'src/styles/mixins.scss' as *;
+
+.accordion {
+  padding: 0.2rem;
+  @include card;
+
+  &__heading {
+    padding: .2rem;
+    cursor: pointer;
+  }
+
+  &__content {
+    transition: all ease-in-out 500ms;
+  }
+}

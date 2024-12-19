@@ -1,0 +1,11 @@
+@use 'src/styles/mixins.scss' as *;
+
+.answer-form {
+  margin-top: 1rem;
+  @include card;
+
+  &__actions {
+    margin-top: 1rem;
+    @include flex-end;
+  }
+}

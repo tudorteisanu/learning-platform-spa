@@ -1,0 +1,17 @@
+<section class="container">
+  <app-back-button label="To list"/>
+
+  @if (course()) {
+    <section class="course-details">
+      <app-course-card [course]="course()"/>
+    </section>
+    <section>
+      <app-add-lesson-dialog [courseId]="courseId()" />
+      <app-lessons-list [lessons]="lessonsById()"/>
+    </section>
+  } @else {
+    <section class="loading">
+      <p>Loading course details...</p>
+    </section>
+  }
+</section>

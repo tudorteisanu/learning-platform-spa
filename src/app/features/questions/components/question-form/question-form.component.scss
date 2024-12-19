@@ -1,0 +1,9 @@
+@use 'src/styles/mixins.scss' as *;
+
+.question-edit {
+  @include card;
+
+  &__form {
+    margin-top: 0.5rem;
+  }
+}

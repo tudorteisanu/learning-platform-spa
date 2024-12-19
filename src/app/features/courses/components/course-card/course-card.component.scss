@@ -1,8 +1,9 @@
+
+@use 'src/styles/mixins.scss' as *;
+
 .course-card {
-  border: 1px solid #ddd;
-  padding: 16px;
-  border-radius: 8px;
-  transition: box-shadow 0.3s;
+  @include card;
+
   &:hover {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }

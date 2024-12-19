@@ -10,6 +10,12 @@
   justify-content: center;
 }
 
+@mixin flex-end {
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
 $breakpoints: (
   "xs": 480px,
   "sm": 768px,
@@ -58,4 +64,28 @@ $boxShadowOptions: (
   } @else {
     @warn "Breakpoint `#{$breakpoint}` not found in `$breakpoints` map.";
   }
+}
+
+
+@mixin max-width($breakpoint) {
+  $width: map-get($breakpoints, $breakpoint);
+
+  @if $width {
+    max-width: $width;
+    margin: auto;
+  } @else {
+    @warn "Breakpoint `#{$breakpoint}` not found in `$breakpoints` map.";
+  }
+}
+
+@mixin flex-start {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+}
+
+@mixin card {
+  border-radius: .2rem;
+  padding: 1rem;
+  background-color: white;
 }

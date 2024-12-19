@@ -1,0 +1,22 @@
+.content {
+  display: flex;
+  flex-direction: column;
+
+  &__heading {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
+
+li {
+  margin-bottom: 1rem;
+}
+
+.actions {
+  border-top: 1px solid lightgray;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  display: flex;
+  gap: .5rem;
+}
