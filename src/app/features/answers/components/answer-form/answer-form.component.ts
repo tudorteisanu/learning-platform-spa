@@ -1,8 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, ReactiveFormsModule } from '@angular/forms';
-import { AnswersService } from '../../services/answers.service';
+import { AnswersService } from '@/App/features/answers/services/answers.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { ButtonComponent } from "../../../../shared/components/button/button.component";
+import { ButtonComponent } from "@/App/shared/components/button/button.component";
 
 @Component({
   selector: 'app-answer-form',

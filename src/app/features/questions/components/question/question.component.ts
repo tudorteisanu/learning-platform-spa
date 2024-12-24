@@ -1,7 +1,7 @@
 import { Component, computed, inject, input, signal } from '@angular/core';
-import { Question } from 'src/app/shared/models/question.model';
+import { Question } from '@/App/shared/models/question.model';
 import { QuestionAnswersComponent } from "../question-answers/question-answers.component";
-import { Answer } from 'src/app/shared/models/answer.model';
+import { Answer } from '@/App/shared/models/answer.model';
 import { QuestionsService } from '../../services/questions.service';
 import { LessonsService } from '../../../lessons/services/lessons.service';
 
@@ -11,7 +11,6 @@ import { LessonsService } from '../../../lessons/services/lessons.service';
   imports: [QuestionAnswersComponent],
   templateUrl: './question.component.html',
   styleUrl: './question.component.scss',
-  providers: [QuestionsService],
 })
 export class QuestionComponent {
   protected readonly questionsService = inject(QuestionsService);

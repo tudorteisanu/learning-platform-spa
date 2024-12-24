@@ -1,9 +1,9 @@
-import { Component, OnInit, computed, inject, input } from '@angular/core';
-import { AnswersService } from '../../services/answers.service';
+import { Component, OnInit, inject } from '@angular/core';
+import { AnswersService } from '@/App/features/answers/services/answers.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { Answer } from 'src/app/shared/models/answer.model';
-import { ButtonComponent } from "../../../../shared/components/button/button.component";
-import { IconComponent } from "../../../../shared/components/icon/icon.component";
+import { Answer } from '@/App/shared/models/answer.model';
+import { ButtonComponent } from "@/App/shared/components/button/button.component";
+import { IconComponent } from "@/App/shared/components/icon/icon.component";
 
 @Component({
   selector: 'app-answers-list',
@@ -26,7 +26,7 @@ export class AnswersListComponent implements OnInit {
     this.answersService.setValue(option);
   }
 
-  delete(id: string) {
+  deleteAnswer(id: number) {
     this.answersService.delete(id).subscribe();
   }
 }

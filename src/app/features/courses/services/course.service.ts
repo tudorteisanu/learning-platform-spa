@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, map, Observable, tap } from 'rxjs';
-import { Course } from '../../../shared/models/course.model';
-import { PaginatedResponse } from 'src/app/shared/models/paginated-response.model';
-import { Lesson } from 'src/app/shared/models/lesson.model';
+import { Course } from '@/App/shared/models/course.model';
+import { PaginatedResponse } from '@/App/shared/models/paginated-response.model';
+import { Lesson } from '@/App/shared/models/lesson.model';
 
 @Injectable({
   providedIn: 'root',

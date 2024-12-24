@@ -21,7 +21,10 @@
       "ES2022",
       "dom"
     ],
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "@/App/*": ["./src/app/*"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

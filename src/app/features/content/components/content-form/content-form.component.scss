@@ -1,0 +1,11 @@
+@use 'src/styles/mixins.scss' as *;
+
+.content {
+  @include card;
+
+  &__actions {
+    @include flex-end;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+}

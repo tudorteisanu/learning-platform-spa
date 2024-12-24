@@ -1,9 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
-import { BehaviorSubject, tap } from 'rxjs';
-import { Answer } from 'src/app/shared/models/answer.model';
-import { Question } from 'src/app/shared/models/question.model';
-import { unionArraysByAscendPriority } from 'src/app/utils';
+import { BehaviorSubject, map, tap } from 'rxjs';
+import { Question } from '@/App/shared/models/question.model';
+import { unionArraysByAscendPriority } from '@/App/utils';
 
 @Injectable({providedIn: 'root'})
 export class QuestionsService {
@@ -16,23 +15,27 @@ export class QuestionsService {
 
   fetch(params: Record<string, any> = {}) {
     return this.http.get<Question[]>(this.apiUrl, { params })
-    .pipe(tap((value) => {
-      this.questionsSubject.next(unionArraysByAscendPriority(this.questionsSubject.getValue(), value, 'id'));
-    }))
+    .pipe(
+      tap((value) => {
+        this.setQuestions(value);
+      })
+    );
+
   }
 
-  answer(questionId: string, answerId: string) {
+  answer(questionId: number, answerId: number) {
     const answerUrl = `${this.apiUrl}/${questionId}/answer`;
 
     return this.http.post<Question>(answerUrl, { answerId })
       .pipe(
         tap((value) => {
+          console.log(this.questionsSubject.getValue());
           this.updateQuestion(value);
         })
       );
   }
 
-  update(questionId: string, question: Partial<Question>) {
+  update(questionId: number, question: Partial<Question>) {
     const answerUrl = `${this.apiUrl}/${questionId}`;
 
     return this.http.patch<Question>(answerUrl, question)
@@ -52,7 +55,7 @@ export class QuestionsService {
       ));
   }
 
-  delete(id: string) {
+  delete(id: number) {
     const url = `${this.apiUrl}/${id}`;
 
     return this.http.delete<void>(url)
@@ -69,7 +72,7 @@ export class QuestionsService {
     this.questionsSubject.next(collection)
   }
 
-  removeQuestionById(id: string) {
+  removeQuestionById(id: number) {
     const collection = this.questionsSubject.getValue().filter(item => item.id !== id);
 
     this.questionsSubject.next(collection)
@@ -88,6 +91,6 @@ export class QuestionsService {
       return item;
     });
 
-    this.questionsSubject.next(collection);
+    this.setQuestions(collection);
   }
 }

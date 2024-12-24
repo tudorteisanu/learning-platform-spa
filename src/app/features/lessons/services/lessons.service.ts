@@ -1,10 +1,10 @@
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable, filter, tap } from 'rxjs';
-import { Lesson, LessonContent } from 'src/app/shared/models/lesson.model';
-import { Question } from 'src/app/shared/models/question.model';
-import { Answer } from 'src/app/shared/models/answer.model';
+import { Lesson } from '@/App/shared/models/lesson.model';
+import { Question } from '@/App/shared/models/question.model';
 import { AddLesson } from '../models/add-lesson.model';
+import { Content } from '@/App/shared/models/content.model';
 
 @Injectable({
   providedIn: 'root',
@@ -19,7 +19,7 @@ export class LessonsService {
   lesson$ = this.lessonSubject.asObservable();
   lessons$ = this.lessonsSubject.asObservable();
 
-  getLessonDetails(id: string): void {
+  getLessonDetails(id: number): void {
     this.http.get<Lesson>(`/lessons/${id}`)
       .subscribe((lesson) => {
         this.lessonSubject.next(lesson);
@@ -33,7 +33,7 @@ export class LessonsService {
     }));
   }
 
-  updateQuestion(id: string, data: Partial<Question>) {
+  updateQuestion(id: number, data: Partial<Question>) {
     const lesson = this.lessonSubject.getValue();
 
     if (!lesson) {
@@ -54,13 +54,13 @@ export class LessonsService {
     })
   }
 
-  create(courseId: string, lesson: AddLesson): Observable<Lesson>{
+  create(courseId: number, lesson: AddLesson): Observable<Lesson>{
     return this.http.post<Lesson>('/lessons', { ...lesson, courseId }).pipe(tap((lesson) => {
       this.lessonsSubject.next([...this.lessonsSubject.getValue(), lesson])
     }));
   }
 
-  update(id: string, data: Partial<Lesson>) {
+  update(id: number, data: Partial<Lesson>) {
     this.http.patch<Lesson>(`/lessons/${id}`, data)
       .subscribe((response) => {
         this.lessonSubject.next(response);
@@ -68,35 +68,10 @@ export class LessonsService {
       });
   }
 
-  stringifyContent(content: LessonContent[]) {
+  stringifyContent(content: Content[]) {
     return JSON.stringify(content.map(({id, type, data, position}) => ({
       id, type, data, position
     })));
-  }
-
-  addQuestionOption(questionId: string, option: Answer) {
-    const lesson = this.lessonSubject.getValue();
-
-    if (!lesson) {
-      return;
-    }
-
-    this.lessonSubject.next({
-      ...lesson,
-      questions: lesson.questions.map(item => {
-        if (item.id === questionId) {
-          return {
-            ...item,
-            answers: [
-              ...item.answers,
-              option
-            ]
-           };
-        }
-
-        return item;
-      })
-    })
   }
 
   filterBy(filterBy: (filter: any) => boolean): Observable<Lesson[]> {

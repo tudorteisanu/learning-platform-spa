@@ -1,0 +1,36 @@
+
+<form [formGroup]="form" (ngSubmit)="submit()" class="content">
+  <div >
+    <h2>Content Details</h2>
+    <div class="content__body">
+      <label for="">
+        <span>Type</span>
+        <select formControlName="type">
+          <option value="text">Text</option>
+          <option value="image">Image</option>
+          <option value="video">Video</option>
+        </select>
+      </label>
+      <label for="">
+        <span>Position</span>
+        <input formControlName="position" type="number">
+      </label>
+    </div>
+    <label for="">
+      @switch (form.controls.type.getRawValue()) {
+        @case ('text') {
+          <span>Desctiption</span>
+          <textarea rows="6" formControlName="data" type="text"></textarea>
+        }
+        @default {
+          <span>Url</span>
+          <input formControlName="data" type="text">
+        }
+      }
+  </label>
+  </div>
+  <div class="content__actions">
+    <app-button (click)="form.reset()" text>Cancel</app-button>
+    <app-button [disabled]="form.invalid" type="submit">Submit</app-button>
+  </div>
+</form>

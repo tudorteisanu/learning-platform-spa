@@ -1,6 +1,8 @@
-import { Component, computed, input, output } from '@angular/core';
-import { Answer } from 'src/app/shared/models/answer.model';
-import { IconComponent } from "../../../../shared/components/icon/icon.component";
+import { Component, computed, inject, input, output } from '@angular/core';
+import { Answer } from '@/App/shared/models/answer.model';
+import { IconComponent } from "@/App/shared/components/icon/icon.component";
+import { AnswersService } from '@/App/features/answers/services/answers.service';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-question-answers',
@@ -10,12 +12,16 @@ import { IconComponent } from "../../../../shared/components/icon/icon.component
   styleUrl: './question-answers.component.scss'
 })
 export class QuestionAnswersComponent {
-  answers = input.required<Answer[]>();
-  userAnswer = input.required<string | null>();
-  correctAnswer = input.required<string | null>();
+  protected readonly answersService = inject(AnswersService);
+
+  answers = input.required<number[]>();
+  userAnswer = input.required<number | null>();
+  correctAnswer = input.required<number | null>();
+
+  answersSignal = toSignal(this.answersService.answers$, {initialValue: []});
+  fullAnswers = computed(() => this.answersSignal().filter(item => this.answers().includes(item.id)))
 
   select = output<Answer>();
-
   disabled = computed(() => !!this.userAnswer());
 
   emitSelect(option: Answer) {
@@ -26,12 +32,11 @@ export class QuestionAnswersComponent {
     this.select.emit(option);
   }
 
-  isCorrect(optionId: string): boolean {
+  isCorrect(optionId: number): boolean {
     return optionId === this.correctAnswer();
   }
 
-
-  isIncorrect(optionId: string): boolean {
+  isIncorrect(optionId: number): boolean {
     return !!this.userAnswer() && optionId === this.userAnswer() && !this.isCorrect(optionId);
   }
 }

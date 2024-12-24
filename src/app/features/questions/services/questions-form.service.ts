@@ -1,6 +1,6 @@
 import { Injectable, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
-import { Question } from 'src/app/shared/models/question.model';
+import { Question } from '@/App/shared/models/question.model';
 import { QuestionsService } from './questions.service';
 import { tap } from 'rxjs';
 
@@ -13,17 +13,17 @@ export class QuestionsFormService {
 
   form = this.fb.group({
     questionText: ['', Validators.required],
-    correctAnswer: ['', Validators.required],
+    correctAnswer: [0, Validators.required],
     answers: [[] as any, Validators.required],
   });
 
-  selectedQuestionId = signal<string | null>(null);
+  selectedQuestionId = signal<number | null>(null);
 
   getForm() {
     return this.form;
   }
 
-  setSelectedQuestion(questionId: string | null) {
+  setSelectedQuestion(questionId: number | null) {
     this.selectedQuestionId.set(questionId);
   }
 
@@ -31,7 +31,7 @@ export class QuestionsFormService {
     this.form.patchValue(value);
   }
 
-  submit(lessonId: string) {
+  submit(lessonId: number) {
     let request = this.questionsService.create({...this.form.getRawValue(), lessonId})
     const selectedQuestionId = this.selectedQuestionId();
 

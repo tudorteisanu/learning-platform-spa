@@ -1,9 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject, signal } from '@angular/core';
 import { NonNullableFormBuilder, Validators } from '@angular/forms';
-import { BehaviorSubject, delay, finalize, tap } from 'rxjs';
-import { Answer } from 'src/app/shared/models/answer.model';
-import { unionArraysByAscendPriority } from 'src/app/utils';
+import { BehaviorSubject, delay, finalize, map, tap } from 'rxjs';
+import { Answer } from '@/App/shared/models/answer.model';
+import { unionArraysByAscendPriority } from '@/App/utils';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +15,7 @@ export class AnswersService {
   loadingSubject = new BehaviorSubject(false);
   loading$ = this.loadingSubject.asObservable();
 
-  selectedAnswerId = signal<string | null>(null);
+  selectedAnswerId = signal<number | null>(null);
 
   private readonly form = this.fb.group({
     description: ['', Validators.required],
@@ -32,6 +32,7 @@ export class AnswersService {
   create(answer: Pick<Answer, 'description'>) {
     return this.http.post<Answer>('/answers', answer)
       .pipe(
+        delay(2000),
         tap(response => {
             this.setAnswers([response])
           }
@@ -50,7 +51,9 @@ export class AnswersService {
   }
 
   setAnswers(answers: Answer[]) {
-    this.answersSubject.next(unionArraysByAscendPriority(this.answersSubject.getValue(), answers, 'id'));
+    const items = this.answersSubject.getValue();
+
+    this.answersSubject.next(unionArraysByAscendPriority(items, answers, 'id'));
   }
 
   getForm() {
@@ -72,7 +75,6 @@ export class AnswersService {
     }
 
     return request.pipe(
-      delay(2000),
       finalize(() => {
         this.loadingSubject.next(false)
         this.form.reset();
@@ -80,7 +82,7 @@ export class AnswersService {
     );
   }
 
-  delete(id: string) {
+  delete(id: number) {
     return this.http.delete(`/answers/${id}`)
       .pipe(
         tap(() => {

@@ -1,55 +1,65 @@
-import { Component, ElementRef, OnInit, Renderer2, inject, input, viewChild } from '@angular/core';
-import { IconsService } from '../../services/icons.service';
-
-const DEFAULT_ROOT_FOLDER = 'icons';
+import { Component, OnChanges, SimpleChanges, inject, viewChild, ElementRef, input } from '@angular/core';
+import { HttpBackend, HttpClient } from '@angular/common/http';
+import { Observable, lastValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-icon',
-  standalone: true,
-  imports: [],
   templateUrl: './icon.component.html',
-  styleUrls: ['./icon.component.scss']
+  styleUrl: './icon.component.scss',
+  standalone: true,
 })
-export class IconComponent implements OnInit {
-  private readonly renderer = inject(Renderer2);
-  private readonly hostElement = inject(ElementRef);
-
-  private readonly iconsService = inject(IconsService);
-
-  rootFolder = input(DEFAULT_ROOT_FOLDER);
+export class IconComponent implements OnChanges {
   name = input.required<string>();
+  contentRef = viewChild.required<ElementRef>('content');
 
-  element = viewChild.required<ElementRef<HTMLDivElement>>('content');
+  private static iconCache: Map<string, string> = new Map();
+  private static ongoingFetches: Map<string, Promise<string>> = new Map();
 
-  ngOnInit(): void {
-    this.fetchIcon();
+  private readonly httpBackend = inject(HttpBackend);
+  private http = new HttpClient(this.httpBackend);
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['name'] && this.name()) {
+      this.loadIcon(this.name());
+    }
   }
 
-  fetchIcon() {
-    this.iconsService.fetchIcon(this.name(), this.rootFolder())
-      .subscribe({
-        next: icon => this.injectIcon(icon),
-      });
+  injectSvg(content: string): void {
+    this.contentRef().nativeElement.innerHTML = content;
   }
 
-  private injectIcon(icon: string): void {
-    if (!icon) {
+  private async loadIcon(iconName: string): Promise<void> {
+    if (IconComponent.iconCache.has(iconName)) {
+      this.injectSvg(IconComponent.iconCache.get(iconName) ?? '')
       return;
     }
 
-    this.renderer.setProperty(this.element().nativeElement, 'innerHTML', icon);
-    this.setIconSize();
+    if (IconComponent.ongoingFetches.has(iconName)) {
+      const cachedPromise = IconComponent.ongoingFetches.get(iconName);
+
+      if (cachedPromise) {
+        const svgContent = await cachedPromise;
+        this.injectSvg(svgContent);
+      }
+
+      return;
+    }
+
+    const fetchPromise = this.fetchIcon(iconName);
+    IconComponent.ongoingFetches.set(iconName, fetchPromise);
+
+    try {
+      const svgContent = await fetchPromise;
+      IconComponent.iconCache.set(iconName, svgContent)
+     this.injectSvg(svgContent);
+    } finally {
+      IconComponent.ongoingFetches.delete(iconName);
+    }
   }
 
-  private setIconSize(): void {
-    const { height, width } = getComputedStyle(this.hostElement.nativeElement);
+  private fetchIcon(iconName: string): Promise<string> {
+    const request$: Observable<string> = this.http.get(`/icons/${iconName}.svg`, { responseType: 'text' });
 
-    if (width !== 'auto' && width) {
-      this.renderer.setStyle(this.element().nativeElement, 'width', width);
-    }
-
-    if (height !== 'auto' && height) {
-      this.renderer.setStyle(this.element().nativeElement, 'height', height);
-    }
+    return lastValueFrom(request$);
   }
 }

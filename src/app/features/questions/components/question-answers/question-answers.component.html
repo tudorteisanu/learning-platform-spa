@@ -1,5 +1,5 @@
 <ul>
-  @for (option of answers(); track $index) {
+  @for (option of fullAnswers(); track $index) {
     <li
     [class.correct]="userAnswer() && isCorrect(option.id)"
     [class.incorrect]="option.id == userAnswer() && correctAnswer() && userAnswer() !== correctAnswer()"

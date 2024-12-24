@@ -7,7 +7,7 @@
     </section>
     <section>
       <app-add-lesson-dialog [courseId]="courseId()" />
-      <app-lessons-list [lessons]="lessonsById()"/>
+      <app-lessons-list [courseId]="courseId()"/>
     </section>
   } @else {
     <section class="loading">

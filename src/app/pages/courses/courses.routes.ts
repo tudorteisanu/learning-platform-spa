@@ -3,15 +3,17 @@ import { CoursesOverviewComponent } from './courses-overview/courses-overview.co
 import { CourseDetailsComponent } from './course-details/course-details.component';
 import { courseResolver } from './resolvers/course.resolver';
 import { courseLessonsResolver } from './resolvers/course-lessons.resolver';
+import { courseIdResolver } from './resolvers/course-id.resolver';
 
 export const coursesRoutes: Route[] = [
   { path: '', component: CoursesOverviewComponent },
   {
     path: ':id',
     component: CourseDetailsComponent,
-    resolve: [
+    resolve:  {
+      courseId:  courseIdResolver,
       courseResolver,
-      courseLessonsResolver,
-    ]
+      courseLessonsResolver
+    },
   },
 ];

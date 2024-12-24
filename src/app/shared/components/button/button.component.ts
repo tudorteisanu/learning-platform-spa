@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { booleanTransformer } from 'src/app/utils';
+import { booleanTransformer } from '@/App/utils';
 
 @Component({
   selector: 'app-button',

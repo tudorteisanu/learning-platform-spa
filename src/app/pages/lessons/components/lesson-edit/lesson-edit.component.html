@@ -15,6 +15,7 @@
     <app-answers-list />
   }
   @case ('content') {
-    <div>Content</div>
+    <app-content-form [lessonId]="lessonId()" />
+    <app-content-list [lessonId]="lessonId()" />
   }
 }

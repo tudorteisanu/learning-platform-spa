@@ -2,7 +2,7 @@ import { Component, OnInit, computed, inject, input, signal } from '@angular/cor
 import { QuestionsService } from '../../services/questions.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { QuestionsFormService } from '../../services/questions-form.service';
-import { Question } from 'src/app/shared/models/question.model';
+import { Question } from '@/App/shared/models/question.model';
 import { ButtonComponent } from "../../../../shared/components/button/button.component";
 import { IconComponent } from "../../../../shared/components/icon/icon.component";
 
@@ -17,7 +17,7 @@ export class QuestionsListComponent implements OnInit {
   protected readonly questionsService = inject(QuestionsService);
   protected readonly questionsFormService = inject(QuestionsFormService);
 
-  lessonId = input.required<string>();
+  lessonId = input.required<number>();
 
   questions = toSignal(this.questionsService.questions$, {initialValue: []});
   questionsById = computed(() => this.questions().filter(item => item.lessonId === this.lessonId()));
@@ -34,7 +34,7 @@ export class QuestionsListComponent implements OnInit {
     this.questionsFormService.setFormValue(value);
   }
 
-  delete(id: string) {
+  delete(id: number) {
     this.questionsService.delete(id).subscribe();
   }
 }

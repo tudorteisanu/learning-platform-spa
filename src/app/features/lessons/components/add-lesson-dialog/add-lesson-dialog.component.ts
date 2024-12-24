@@ -14,7 +14,7 @@ export class AddLessonDialogComponent {
   protected readonly fb = inject(NonNullableFormBuilder);
   protected readonly lessonsService = inject(LessonsService);
 
-  courseId = input<string>();
+  courseId = input<number>();
   isVisibile = signal(false);
 
   form = this.fb.group({

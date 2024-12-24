@@ -1,7 +1,7 @@
 import { inject } from "@angular/core";
 import { ResolveFn } from "@angular/router";
 import { switchMap } from "rxjs";
-import { CourseService } from "src/app/features/courses/services/course.service";
+import { CourseService } from "@/App/features/courses/services/course.service";
 
 export const courseResolver: ResolveFn<any> = (route) => {
   const id = route.paramMap.get('id');

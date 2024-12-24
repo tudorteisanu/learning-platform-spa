@@ -1,0 +1,12 @@
+<section class="content-list">
+  <h2>Content List</h2>
+  <ul>
+    @for (content of content(); track content.id) {
+      <li class="content-list__item">
+        <span>{{ content.position }}</span>
+        <span>{{ content.type }}</span>
+        <span>{{ content.data }}</span>
+      </li>
+    }
+  </ul>
+</section>

@@ -1,10 +1,8 @@
-import { Answer } from "./answer.model";
-
 export interface Question {
-  id: string;
-  lessonId: string;
+  id: number;
+  lessonId: number;
   questionText: string;
-  answers: Answer[];
-  correctAnswer: string;
-  userAnswer: string | null;
+  answers: number[];
+  correctAnswer: number;
+  userAnswer: number | null;
 }

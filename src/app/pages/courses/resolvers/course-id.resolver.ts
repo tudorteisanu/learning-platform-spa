@@ -1,6 +1,6 @@
 import { ResolveFn } from "@angular/router";
 
-export const lessonIdResolver: ResolveFn<any> = (route, state) => {
+export const courseIdResolver: ResolveFn<any> = (route) => {
   const id = route.paramMap.get('id');
 
   if (!id) {

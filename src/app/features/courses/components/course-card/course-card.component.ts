@@ -1,5 +1,5 @@
 import { Component, input } from '@angular/core';
-import { Course } from 'src/app/shared/models/course.model';
+import { Course } from '@/App/shared/models/course.model';
 
 @Component({
   selector: 'app-course-card',

@@ -1,7 +1,7 @@
 <section class="lessons-list">
   <h2>Lessons</h2>
   <ul>
-    @for (lesson of lessons(); track lesson.id) {
+    @for (lesson of lessonsByCourseId(); track lesson.id) {
       <li class="lesson-item">
         <span>{{ lesson.title }}</span>
         <button [routerLink]="['/lessons', lesson.id]" class="view-details">

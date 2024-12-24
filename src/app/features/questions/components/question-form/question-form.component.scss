@@ -6,4 +6,13 @@
   &__form {
     margin-top: 0.5rem;
   }
+
+  .question {
+    &__footer {
+      margin-top: 1rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+    }
+  }
 }

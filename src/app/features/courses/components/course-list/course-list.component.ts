@@ -1,6 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CourseService } from 'src/app/features/courses/services/course.service';
-import { Course } from 'src/app/shared/models/course.model';
+import { CourseService } from '@/App/features/courses/services/course.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { CourseCardComponent } from "../course-card/course-card.component";
 

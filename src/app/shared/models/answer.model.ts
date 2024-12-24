@@ -1,4 +1,4 @@
 export interface Answer {
-  id: string;
+  id: number;
   description: string;
 }

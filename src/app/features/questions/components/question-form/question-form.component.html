@@ -11,6 +11,7 @@
       </label>
       <div>
         <app-multiselect
+          [options]="answers()"
           textKey="description"
           valueKey="id"
           formControlName="answers"
@@ -20,15 +21,17 @@
       <label for="">
         <span>Correct answer</span>
         <select formControlName="correctAnswer">
-          @for(option of form.controls.answers.getRawValue(); track option.id) {
+          @for(option of selectedAnswers(); track option.id) {
             <option [ngValue]="option.id">
               {{option.description}}
             </option>
+          } @empty {
+            <option [ngValue]="null">There are no items</option>
           }
         </select>
       </label>
       <div class="question__footer">
-        <button>Submit</button>
+        <app-button>Submit</app-button>
       </div>
     </div>
   </form>

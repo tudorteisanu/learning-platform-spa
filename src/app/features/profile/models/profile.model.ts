@@ -1,12 +1,12 @@
 export interface Achievement {
-  achievementId: string;
+  achievementId: number;
   title: string;
   description: string;
-  dateAchieved: Date | null; // `null` if not yet achieved
+  dateAchieved: Date | null;
 }
 
 export interface UserProfile {
-  userId: string;
+  userId: number;
   name: string;
   email: string;
   avatarUrl: string | null;

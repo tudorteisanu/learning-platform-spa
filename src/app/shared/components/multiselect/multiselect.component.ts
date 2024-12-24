@@ -1,4 +1,4 @@
-import { Component, input, signal, OnInit, inject, forwardRef } from '@angular/core';
+import { Component, input, signal, OnInit, inject, forwardRef, computed } from '@angular/core';
 import { ClickOutsideDirective } from '../../directives/click-outside.directive';
 import { HttpClient } from '@angular/common/http';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
@@ -17,14 +17,18 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
     },
   ]
 })
-export class MultiselectComponent implements OnInit, ControlValueAccessor {
-  options = signal<any[]>([]);
+export class MultiselectComponent implements ControlValueAccessor {
+  options = input<any[]>([]);
   http = inject(HttpClient);
   valueKey = input<string>('id');
   textKey = input<string>('text');
   fetchUrl = input<string>('text');
-  selectedItems = signal<any[]>([]);
+  selectedItemsIds = signal<(string | number)[]>([]);
   areOptionsVisivle = signal(false);
+
+  readonly selectedItems = computed(() =>
+    this.options().filter((item) =>
+      this.selectedItemsIds().includes(item[this.valueKey()])));
 
   onChange = (value: any) => {};
 
@@ -32,7 +36,7 @@ export class MultiselectComponent implements OnInit, ControlValueAccessor {
 
   writeValue(obj: any): void {
     this.onChange(obj);
-    this.selectedItems.set(obj);
+    this.selectedItemsIds.set(obj);
   }
 
   registerOnChange(fn: any): void {
@@ -43,14 +47,6 @@ export class MultiselectComponent implements OnInit, ControlValueAccessor {
     this.onTouched = fn;
   }
 
-  ngOnInit(): void {
-    this.http.get<any>(this.fetchUrl())
-      .subscribe(value => {
-        this.options.set(value);
-      });
-  }
-
-
   toggleSelection(option: any): void {
     if (this.isSelected(option)) {
       this.remove(option);
@@ -58,24 +54,24 @@ export class MultiselectComponent implements OnInit, ControlValueAccessor {
       this.add(option);
     }
 
-    this.onChange(this.selectedItems());
+    this.onChange(this.selectedItemsIds());
   }
 
   filterBySelected(item: any) {
-    return this.selectedItems().includes(item);
+    return this.selectedItemsIds().includes(item);
   }
 
   isSelected(option: any) {
-    return this.selectedItems().some(item => item[this.valueKey()] === option[this.valueKey()]);
+    return this.selectedItemsIds().includes(option[this.valueKey()]);
   }
 
   add(option: any) {
-    this.selectedItems.update((value) => [...value, option]);
+    this.selectedItemsIds.update((value) => [...value, option[this.valueKey()]]);
   }
 
   remove(option: any) {
-    this.selectedItems.update(items =>
-      items.filter(value => value[this.valueKey()] !== option[this.valueKey()]));
+    this.selectedItemsIds.update(items =>
+      items.filter(value => value !== option[this.valueKey()]));
   }
 
   toggle() {
