@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { inject } from '@angular/core';
-import { ProfileService } from '../../../features/profile/services/profile.service';
-import { UserProfile } from '../../../features/profile/models/profile.model';
-import { ProfileDetailsComponent } from "../../../features/profile/components/profile-details/profile-details.component";
+import { ProfileService } from '../../../../features/profile/services/profile.service';
+import { UserProfile } from '../../../../features/profile/models/profile.model';
+import { ProfileDetailsComponent } from "../../../../features/profile/components/profile-details/profile-details.component";
 import { AsyncPipe } from '@angular/common';
-import { ProfileAchievementsComponent } from "../../../features/profile/components/profile-achievements/profile-achievements.component";
+import { ProfileAchievementsComponent } from "../../../../features/profile/components/profile-achievements/profile-achievements.component";
 
 @Component({
     selector: 'app-profile-page',

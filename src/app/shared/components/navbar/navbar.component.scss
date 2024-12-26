@@ -1,12 +1,12 @@
 @use 'src/styles/mixins.scss' as *;
 @use 'src/styles/variables.scss' as *;
 
-nav {
+.navbar {
   width: 100%;
   padding: 1rem;
   background-color: $primary-color;
 
-  @include flex-center;
+  @include flex-between;
   @include box-shadow;
 
   ul {

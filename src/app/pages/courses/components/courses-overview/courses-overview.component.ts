@@ -1,7 +1,7 @@
 import { Component, inject } from '@angular/core';
-import { CourseService } from '../../../features/courses/services/course.service';
+import { CourseService } from '../../../../features/courses/services/course.service';
 import { toSignal } from '@angular/core/rxjs-interop';
-import { CourseCardComponent } from '../../../features/courses/components/course-card/course-card.component';
+import { CourseCardComponent } from '../../../../features/courses/components/course-card/course-card.component';
 import { RouterLink } from '@angular/router';
 
 @Component({

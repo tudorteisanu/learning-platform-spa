@@ -1,9 +1,15 @@
-<nav>
-  <ul>
-    @for (link of links; track link.to) {
-      <li>
-        <a [routerLink]="link.to"> {{link.label}}</a>
-      </li>
-    }
-  </ul>
-</nav>
+
+
+<div class="navbar">
+  <div>Logo</div>
+  <nav>
+    <ul>
+      @for (link of links; track link.to) {
+        <li>
+          <a [routerLink]="link.to"> {{link.label}}</a>
+        </li>
+      }
+    </ul>
+  </nav>
+  <app-auth-buttons/>
+</div>

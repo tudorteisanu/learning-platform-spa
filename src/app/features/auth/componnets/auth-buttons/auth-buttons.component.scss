@@ -1,0 +1,8 @@
+@use 'src/styles/variables.scss' as *;
+
+.auth-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  color: $white-color;
+}
