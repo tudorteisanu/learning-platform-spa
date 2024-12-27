@@ -1,1 +1,21 @@
-<p>register-form works!</p>
+<form [formGroup]="form" (ngSubmit)="submit()" class="register-form">
+  <label for="">
+    <span>Username</span>
+    <input formControlName="username" autocomplete="username" type="text" />
+  </label>
+  <label for="">
+    <span>Email</span>
+    <input formControlName="email" autocomplete="email" type="text" />
+  </label>
+  <label for="">
+    <span>Password</span>
+    <input formControlName="password" autocomplete="new-password" type="password" />
+  </label>
+  <label for="">
+    <span>Password Confirmation</span>
+    <input formControlName="passwordConfirmation" autocomplete="passwordConfirmation" type="password" />
+  </label>
+  <div class="register-form__actions">
+    <app-button>Submit</app-button>
+  </div>
+</form>

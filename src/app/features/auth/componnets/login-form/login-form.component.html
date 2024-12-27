@@ -1,11 +1,13 @@
-<form [formGroup]="form" (ngSubmit)="submit()">
+<form [formGroup]="form" (ngSubmit)="submit()" class="login-form">
   <label for="">
     <span>Email</span>
-    <input formControlName="email" type="text" />
+    <input formControlName="email" autocomplete="email" type="text" />
   </label>
   <label for="">
     <span>Password</span>
-    <input formControlName="password" type="password" />
+    <input formControlName="password" autocomplete="current-password" type="password" />
   </label>
-  <app-button>Submit</app-button>
+  <div class="login-form__actions">
+    <app-button>Submit</app-button>
+  </div>
 </form>

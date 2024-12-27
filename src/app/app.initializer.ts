@@ -12,7 +12,7 @@ const appInitializerFn = () => {
   }
 
 
-  return null;
+  return () => true;
 };
 
 

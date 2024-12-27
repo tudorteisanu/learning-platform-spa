@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./shared/components/navbar/navbar.component";
+import { SnackbarService } from './shared/services/snackbar.service';
 
 @Component({
   selector: 'app-root',
@@ -11,4 +12,10 @@ import { NavbarComponent } from "./shared/components/navbar/navbar.component";
 })
 export class AppComponent {
   title = 'learning-platform-spa';
+
+  snackBar = inject(SnackbarService);
+
+  show(type: 'success' | 'error' | 'info' = 'success') {
+    this.snackBar.show('This is s test', type)
+  }
 }

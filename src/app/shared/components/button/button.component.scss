@@ -5,14 +5,15 @@
   padding: 0 1rem;
   border-radius: .2rem;
   background-color: $theme-primary;
-  // outline-color: lightblue;
-  // outline-width: thin;
-  // outline-style: solid;
   color: white;
   min-height: 35px;
   min-width: 3rem;
   margin: auto;
   text-align: center;
+  display: inline-block;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
 
   &:disabled {
     background-color: #eae7e7;

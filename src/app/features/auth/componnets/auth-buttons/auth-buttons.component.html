@@ -1,8 +1,13 @@
 <div class="auth-buttons">
   @if (loggedIn()) {
     <span>User name</span>
+    <button (click)="logout()">Logout</button>
   } @else {
-    <button [routerLink]="['/auth/login']">Login</button>
-    <button [routerLink]="['/auth/register']">Register</button>
+    <a [routerLink]="['/auth/login']">
+      Login
+    </a>
+    <a [routerLink]="['/auth/register']">
+      Register
+    </a>
   }
 </div>

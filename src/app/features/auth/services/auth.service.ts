@@ -5,6 +5,7 @@ import { RegisterRequest } from '../models/register.model';
 import { ForgotPasswordRequest, ResetPasswordRequest } from '../models/password.model';
 import { BehaviorSubject, Observable, map, switchMap, tap } from 'rxjs';
 import { CurrentUser } from '@/App/shared/models/current-user.model';
+import { UserRole } from '@/App/shared/enums';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class AuthService {
   token$ = this.tokenSubject.asObservable();
 
   loggedIn$ = this.currentUser$.pipe(map((currentUser) => Boolean(currentUser)));
+  isAdmin$ = this.currentUser$.pipe(map((currentUser) => currentUser?.role === UserRole.Admin));
 
   setToken(token: string | null): void {
     this.tokenSubject.next(token);
@@ -35,8 +37,13 @@ export class AuthService {
     )
   }
 
-  register(payload: RegisterRequest): Observable<LoginResponse> {
-    return this.http.post<LoginResponse>('/auth/register', payload);
+  register(payload: RegisterRequest): Observable<CurrentUser> {
+    return this.http.post<LoginResponse>('/auth/register', payload).pipe(
+      tap((response) => {
+        this.setToken(response.token);
+      }),
+      switchMap(() => this.fetchProfile()),
+    );
   }
 
   forgotPassword(payload: ForgotPasswordRequest): Observable<void> {
@@ -50,5 +57,10 @@ export class AuthService {
   fetchProfile(): Observable<CurrentUser> {
     return this.http.get<CurrentUser>('/profile')
       .pipe(tap((currentUser) => this.currentUserSubject.next(currentUser)));
+  }
+
+  logout(): void {
+    this.currentUserSubject.next(null);
+    this.setToken(null);
   }
 }

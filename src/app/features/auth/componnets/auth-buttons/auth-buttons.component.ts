@@ -15,4 +15,8 @@ export class AuthButtonsComponent {
 
   loggedIn = toSignal(this.authService.loggedIn$, { initialValue: false });
   currentUser = toSignal(this.authService.currentUser$, { initialValue: null });
+
+  logout(): void {
+    this.authService.logout();
+  }
 }

@@ -1,17 +1,17 @@
 <app-dialog
-label="Add lesson"
- [isVisibile]="isVisibile()"
- (cancel)="hide()"
- (show)="show()"
- >
-  <form [formGroup]="form">
-    <label for="">
-      <span>Text</span>
-      <input formControlName="title" type="text">
-    </label>
-  </form>
-  <div class="actions">
-    <button (click)="submit()">Save</button>
-    <button class="cancel" (click)="hide()">Cancel</button>
-  </div>
+  label="Add lesson"
+  [isVisibile]="isVisibile()"
+  (cancel)="hide()"
+  (show)="show()"
+  >
+    <form [formGroup]="form">
+      <label for="">
+        <span>Text</span>
+        <input formControlName="title" type="text">
+      </label>
+    </form>
+    <div class="actions">
+      <button (click)="submit()">Save</button>
+      <button class="cancel" (click)="hide()">Cancel</button>
+    </div>
 </app-dialog>

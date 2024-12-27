@@ -1,0 +1,11 @@
+@use 'src/styles/mixins.scss' as *;
+
+.login-form {
+  @include card;
+  @include max-width('xs');
+
+  &__actions {
+    @include flex-end;
+    margin-top: 1rem;
+  }
+}

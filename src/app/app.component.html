@@ -1,4 +1,9 @@
 <app-navbar />
 <main>
-  <router-outlet></router-outlet>
+  <!-- <router-outlet></router-outlet> -->
+  <div>
+    <button (click)="show()">Show</button>
+    <button (click)="show('error')">Show</button>
+    <button (click)="show('info')">Show</button>
+  </div>
 </main>
